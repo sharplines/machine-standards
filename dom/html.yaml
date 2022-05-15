@@ -134,7 +134,7 @@ mixin-attributes:
 
   attr-alt: &attr-alt
     description: Replacement text for use when images are not available
-    type: *text
+    values: *text
 
 mixin-attribute-groups:
   group-dom-elements: &group-dom-elements
@@ -461,9 +461,12 @@ elements:
     attributes:
       << : *group-global-attributes
 
+      width: {}
+      height: {}
+
   caption:
-    description: ""
-    ref: ""
+    description: Table caption
+    ref: https://html.spec.whatwg.org/multipage/tables.html#the-caption-element
     attributes:
       << : *group-global-attributes
 
@@ -1143,16 +1146,12 @@ elements:
     ref: ""
     attributes:
       << : *group-global-attributes
+      << : *group-media-player
 
       src: {}
       crossorigin: {}
       poster: {}
-      preload: {}
-      autoplay: {}
       playsinline: {}
-      loop: {}
-      muted: {}
-      controls: {}
       width: {}
       height: {}
 
