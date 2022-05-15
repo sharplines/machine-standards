@@ -63,8 +63,8 @@ mixin-value-types:
   autofill-detail-token-list: &autofill-detail-token
     << : *set-of-space-separated-tokens
     member-values:
-      - [shipping, billing]
       - "/^section-/"
+      - [shipping, billing]
       - [name, honorific-prefix, given-name, additional-name, family-name,
           honorific-suffix, nickname, username, new-password, current-password,
           one-time-code, organization-title, organization, street-address,
@@ -153,7 +153,7 @@ mixin-attribute-groups:
 
   group-global-attributes: &group-global-attributes
     << : *group-dom-elements
-    accesskey: &attr-accesskey
+    accesskey:
       description: Keyboard shortcut to activate or focus element
       ref: https://html.spec.whatwg.org/multipage/interaction.html#the-accesskey-attribute
       values:
