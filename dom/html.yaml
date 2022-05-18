@@ -2,6 +2,7 @@
 # This file is hosted and maintained at
 #   https://github.com/sharplines/machine-standards
 #
+
 namespace: http://www.w3.org/1999/xhtml
 
 version:
@@ -222,7 +223,73 @@ mixin-value-types:
   css-color: &css-color
     type: string
 
+  ASCII-case-insensitive-match-for-UTF-8: &ASCII-case-insensitive-match-for-UTF-8
+    type: string
+
+  comma-separated-list-of-image-candidate-strings: &comma-separated-list-of-image-candidate-strings
+    type: string
+  
+  valid-source-size-list: &valid-source-size-list
+    type: string
+  
+  hash-name-reference : &hash-name-reference
+    type: string
+
+  unique-identifier: &unique-identifier
+    type: string
+  
+  input-type-keyword: &input-type-keyword
+    type: string
+
+  
+    
+
 mixin-attributes:
+
+  attr-size: &attr-size
+    description: Size of the control
+    values: *non-negative-integer greater than 0
+
+  attr-required: &attr-required
+    description: Whether the control is required for form submission
+    values: *boolean
+
+  attr-readonly: &attr-readonly
+    description: Whether to allow the value to be edited by the user
+    values: *boolean
+
+  attr-placeholder: &attr-placeholder
+    description: User-visible label to be placed within the form control
+    values: *text
+
+  attr-multiple: &attr-multiple
+    description: Whether to allow multiple values
+    values: *boolean
+
+  attr-minlength: &attr-minlength
+    description: Maximum length of value
+    values: non-negative-integer
+
+  attr-maxlength: &attr-maxlength
+    description: Maximum length of value
+    values: non-negative-integer
+
+  attr-disabled: &attr-disabled
+    description: Whether the form control is disabled
+    ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fe-disabled
+    values: *boolean
+
+  attr-dirname: &attr-dirname
+    description: Name of form control to use for sending the element's directionality in form submission
+    ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fe-dirname
+    values: *text
+
+  attr-autocomplete: &attr-autocomplete
+    description: Hint for form autofill feature
+    ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fe-autocomplete
+    values: *autofill-detail-token-list
+
+
   attr-src: &attr-src
     description: Address of the resource
     values: *url
@@ -249,6 +316,18 @@ mixin-attributes:
   attr-alt: &attr-alt
     description: Replacement text for use when images are not available
     values: *text
+  
+  attr-loading: &attr-loading
+    description: Used when determining loading deferral
+    values: ["lazy", "eager"] 
+
+  attr-srcset: &attr-srcset
+    description: Images to use in different situations, e.g., high-resolution displays, small monitors, etc
+    values: *comma-separated-list-of-image-candidate-strings
+  
+  attr-sizes: &attr-sizes
+    description: Image sizes for different page layouts
+    values: *valid-source-size-list
 
 mixin-attribute-groups:
   group-media-player: &group-media-player
@@ -317,6 +396,11 @@ mixin-attribute-groups:
       description: Automatically focus the element when the page is loaded
       ref: https://html.spec.whatwg.org/multipage/interaction.html#attr-fe-autofocus
       values: *boolean
+
+    cite:
+        description: Link to the source of the quotation or more information about the edit
+        ref: https://html.spec.whatwg.org/multipage/edits.html#attr-mod-cite
+        values: *url
 
     contenteditable:
       description: Whether the element is editable
@@ -461,10 +545,68 @@ mixin-attribute-groups:
       <<: *attr-refferer-policy
       ref: https://html.spec.whatwg.org/multipage/links.html#attr-hyperlink-referrerpolicy
 
+  group-ressources-form: &  group-ressources-form
+    form:
+      description: Associates the element with a form element
+      ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fae-form
+      values: *text
+  
+    name:
+      description: Name of the element to use for form submission and in the form.elements API
+      ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fe-name
+      values: *text 
+
+  group-fs-attributes: &group-fs-attributes
+    formaction:
+        description: URL to use for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formaction
+        values: *url
+
+    formenctype:
+        description: Entry list encoding type to use for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formenctype
+        values: ["application/x-www-form-urlencoded","multipart/form-data","text/plain"]
+          
+    formmethod:
+        description: Variant to use for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formmethod
+        values: ["GET", "POST", "dialog"]    
+
+    formnovalidate:
+        description: Bypass form control validation for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formnovalidate
+        values: *boolean    
+
+    formtarget:
+        description: Browsing context for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formtarget
+        values: *browsing-context-name-or-keyword
+
+  group-dim-attributes: &group-dim-attributes
+    width: 
+      description: Horizontal dimension
+      ref: https://html.spec.whatwg.org/multipage/embedded-content-other.html#attr-dim-width
+      values: *non-negative-integer
+
+    height:
+        description: Vertical dimension
+        ref: https://html.spec.whatwg.org/multipage/embedded-content-other.html#attr-dim-height
+        values: *non-negative-integer
+
+  group-col-attributes: &group-col-attributes
+    span:
+      description: Number of columns spanned by the element
+      ref: https://html.spec.whatwg.org/multipage/tables.html#attr-col-span
+      values: *non-negative-integer
+
+
+  
+
 elements:
   a:
     description: Hyperlink
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element
+    interface: HTMLAnchorElement
     attributes:
       <<: *group-global-attributes
       <<: *group-hyperlink
@@ -473,18 +615,21 @@ elements:
   abbr:
     description: Abbreviation
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-abbr-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   address:
     description: Contact information for a page or article element
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-address-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   area:
     description: Hyperlink or dead area on an image map
     ref: https://html.spec.whatwg.org/multipage/image-maps.html#the-area-element
+    interface: HTMLAreaElement
     attributes:
       <<: *group-global-attributes
       <<: *group-hyperlink
@@ -503,18 +648,21 @@ elements:
   article:
     description: Self-contained syndicatable or reusable composition
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-article-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   aside:
     description: Sidebar for tangentially related content
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-aside-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   audio:
     description: Audio player
     ref: https://html.spec.whatwg.org/multipage/media.html#the-audio-element
+    interface: HTMLAudioElement
     attributes:
       <<: *group-global-attributes
       <<: *group-media-player
@@ -522,12 +670,14 @@ elements:
   b:
     description: Keywords
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-b-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   base:
     description: Base URL and default target browsing context for hyperlinks and forms
     ref: https://html.spec.whatwg.org/multipage/semantics.html#the-base-element
+    interface: HTMLBaseElement
     attributes:
       <<: *group-global-attributes
       href:
@@ -542,107 +692,51 @@ elements:
   bdi:
     description: Represents a span of text that is to be isolated from its surroundings for the purposes of bidirectional text formatting.
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-bdi-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   bdo:
     description: Represents explicit text directionality formatting control for its children. It allows authors to override the Unicode bidirectional algorithm by explicitly specifying a direction override.
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-bdo-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   blockquote:
     description: Represents a section that is quoted from another source
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-blockquote-element
+    interface: HTMLQuoteElement
     attributes:
       <<: *group-global-attributes
       cite:
-        description: Link to the source of the quotation or more information about the edit
+        <<: *cite
         ref: https://html.spec.whatwg.org/multipage/grouping-content.html#attr-blockquote-cite
-        values: *url
-
+        
   body:
     description: Represents the contents of the document
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-body-element
+    interface: HTMLBodyElement
     attributes:
       <<: *group-global-attributes
-      onafterprint:
-        description:
-        ref:
-
-      onbeforeprint:
-      onbeforeunload:
-      onhashchange:
-      onlanguagechange:
-      onmessage:
-      onmessageerror:
-      onoffline:
-      ononline:
-      onpagehide:
-      onpageshow:
-      onpopstate:
-      onrejectionhandled:
-      onstorage:
-      onunhandledrejection:
-      onunload:
 
   br:
     description: Line break, e.g. in poem or postal address
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-br-element
+    interface: HTMLBRElement
     attributes:
       <<: *group-global-attributes
 
   button:
     description: Represents a button labeled by its contents
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-button-element
+    interface: HTMLButtonElement
     attributes:
       <<: *group-global-attributes
-
+      <<: *group-fs-attributes
+      <<: *group-ressources-form
       disabled:
-        description: Whether the form control is disabled
-        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fe-disabled
-        values: *boolean
-
-      form:
-        description: Associates the element with a form element
-        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fae-form
-        values: *text
-
-      formaction:
-        description: URL to use for form submission
-        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formaction
-        values: *url
-
-      formenctype:
-        description: Entry list encoding type to use for form submission
-        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formenctype
-        values:
-          [
-            "application/x-www-form-urlencoded",
-            "multipart/form-data",
-            "text/plain",
-          ]
-
-      formmethod:
-        description: Variant to use for form submission
-        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formmethod
-        values: ["GET", "POST", "dialog"]
-
-      formnovalidate:
-        description: Bypass form control validation for form submission
-        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formnovalidate
-        values: *boolean
-
-      formtarget:
-        description: Browsing context for form submission
-        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-formtarget
-        values: *browsing-context-name-or-keyword
-
-      name:
-        description: Name of form to use in the document.forms API
-        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fe-name
-        values: *text
-
+        <<: *attr-disabled
       type:
         description: Type of button
         ref: https://html.spec.whatwg.org/multipage/form-elements.html#attr-button-type
@@ -656,62 +750,63 @@ elements:
   canvas:
     description: Scriptable bitmap canvas
     ref: https://html.spec.whatwg.org/multipage/canvas.html#the-canvas-element
+    interface: HTMLCanvasElement
     attributes:
       <<: *group-global-attributes
-
       width:
-        description: Horizontal dimension
+        <<: *group-dim-attributes
         ref: https://html.spec.whatwg.org/multipage/canvas.html#attr-canvas-width
-        values: *non-negative-integer
-      height:
-        description: Vertical dimension
+      heigth: 
+        <<: *group-dim-attributes
         ref: https://html.spec.whatwg.org/multipage/canvas.html#attr-canvas-height
-        values: *non-negative-integer
+        
 
   caption:
     description: Table caption
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-caption-element
+    interface: HTMLTableCaptionElement
     attributes:
       <<: *group-global-attributes
 
   cite:
     description: Title of a work
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-cite-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   code:
     description: Computer code
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-code-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   col:
     description: Table column
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-col-element
+    interface: HTMLTableColElement
     attributes:
       <<: *group-global-attributes
-    span:
-      description: Number of columns spanned by the element
-      ref: https://html.spec.whatwg.org/multipage/tables.html#attr-col-span
-      values: *non-negative-integer
-
+      <<: *group-col-attributes
+    
   colgroup:
     description: Group of columns in a table
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-colgroup-element
+    interface: HTMLTableColElement
     attributes:
       <<: *group-global-attributes
+      <<: *group-col-attributes
       span:
-        description: Number of columns spanned by the element
         ref: https://html.spec.whatwg.org/multipage/tables.html#attr-colgroup-span
-        values: *non-negative-integer
 
   data:
     description: Machine-readable equivalent
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-data-element
+    interface: HTMLDataElement
     attributes:
       <<: *group-global-attributes
-      values:
+      value:
         description: Machine-readable value
         ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#attr-data-value
         values: *text
@@ -719,24 +814,28 @@ elements:
   datalist:
     description: Container for options for combo box control
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-datalist-element
+    interface: HTMLDataListElement
     attributes:
       <<: *group-global-attributes
 
   dd:
     description: Represents the description, definition, or value, part of a term-description group in a description list (dl element)
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-dd-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   del:
     description: A removal from the document
     ref: https://html.spec.whatwg.org/multipage/edits.html#the-del-element
+    interface: HTMLModElement
     attributes:
       <<: *group-global-attributes
       cite:
         description: Link to the source of the quotation or more information about the edit
         ref: https://html.spec.whatwg.org/multipage/edits.html#attr-mod-cite
         values: *url
+
       datetime:
         description: Date and (optionally) time of the change
         ref: https://html.spec.whatwg.org/multipage/edits.html#attr-mod-datetime
@@ -745,6 +844,7 @@ elements:
   details:
     description: Disclosure control for hiding details
     ref: https://html.spec.whatwg.org/multipage/interactive-elements.html#the-details-element
+    interface: HTMLDetailsElement
     attributes:
       <<: *group-global-attributes
       open:
@@ -755,12 +855,14 @@ elements:
   dfn:
     description: Defining instance
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-dfn-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   dialog:
     description: Dialog box or window
     ref: https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element
+    interface: HTMLDialogElement
     attributes:
       <<: *group-global-attributes
       open:
@@ -771,91 +873,134 @@ elements:
   div:
     description: Generic flow container, or container for name-value groups in dl elements
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-div-element
+    interface: HTMLDivElement
     attributes:
       <<: *group-global-attributes
 
   dl:
     description: Association list consisting of zero or more name-value groups
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-dl-element
+    interface: HTMLDListElement
     attributes:
       <<: *group-global-attributes
 
   dt:
     description: Represents the term, or name, part of a term-description group in a description list (dl element)
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-dt-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   em:
     description: Stress emphasis of its contents
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-em-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   embed:
     description: Provides an integration point for an external (typically non-HTML) application or interactive content
     ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element
+    interface: HTMLEmbedElement
     attributes:
       <<: *group-global-attributes
+      <<: *group-dim-attributes
       src:
         <<: *attr-src
         ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-embed-src
       type:
-        <<: *mime-string
-        description: Type of embedded resource
-        ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-embed-type
-      width:
-        description:
-        ref: https://html.spec.whatwg.org/multipage/embedded-content-other.html#attr-dim-width
-        values:
-      height:
-        description:
-        ref: https://html.spec.whatwg.org/multipage/embedded-content-other.html#attr-dim-height
-        values:
-
+        
   fieldset:
-    description: ""
-    ref: ""
+    description: Group of form controls
+    ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-fieldset-element
+    interface: HTMLFieldSetElement
     attributes:
       <<: *group-global-attributes
+      <<: *group-ressources-form
+      
+      # <<: *group-fe-attributes ?
+      # disabled:
+      #   description: Whether the descendant form controls, except any inside legend, are disabled
+      #   ref: https://html.spec.whatwg.org/multipage/form-elements.html#attr-fieldset-disabled
+      #   values: *boolean
 
   figcaption:
-    description: ""
-    ref: ""
+    description: Caption for figure
+    ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-figcaption-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   figure:
-    description: ""
-    ref: ""
+    description: Figure with optional caption
+    ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-figure-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   footer:
-    description: ""
-    ref: ""
+    description: Footer for a page or section
+    ref: https://html.spec.whatwg.org/multipage/sections.html#the-footer-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   form:
-    description: ""
-    ref: ""
+    description: User-submittable form
+    ref: https://html.spec.whatwg.org/multipage/forms.html#the-form-element
+    interface: HTMLFormElement
     attributes:
       <<: *group-global-attributes
+      
+      accept-charset:
+        description: Character encodings to use for form submission
+        ref: https://html.spec.whatwg.org/multipage/forms.html#attr-form-accept-charset
+        values: *ASCII-case-insensitive-match-for-UTF-8
 
-      accept-charset: {}
-      action: {}
-      autocomplete: {}
-      enctype: {}
-      method: {}
-      name: {}
-      novalidate: {}
-      rel: {}
-      target: {}
+      action:
+        description: URL to use for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-action
+        values: *non-empty-url
+
+      autocomplete:
+        description: 	Default setting for autofill feature for controls in the form
+        ref: https://html.spec.whatwg.org/multipage/forms.html#attr-form-autocomplete
+        values: ["on", "off"]
+      
+      enctype:
+        description: Entry list encoding type to use for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-enctype
+        values: ["application/x-www-form-urlencoded", "multipart/form-data", "text/plain"]
+       
+      method:
+        description: Variant to use for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-method
+        values: ["GET", "POST", "dialog"]
+
+      name:
+        description: Name of form to use in the document.forms API
+        ref: https://html.spec.whatwg.org/multipage/forms.html#attr-form-name
+        values: *text
+
+      novalidate:
+        description: Bypass form control validation for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-novalidate
+        values: *boolean
+
+      rel:
+        description:
+        ref: https://html.spec.whatwg.org/multipage/forms.html#attr-form-rel
+        values: 
+
+      target:
+        description: Browsing context for form submission
+        ref: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#attr-fs-target
+        values: *browsing-context-name-or-keyword
 
   h1:
     description: ""
     ref: ""
+    interface: HTMLHeadingElement
     attributes:
       <<: *group-global-attributes
 
@@ -890,100 +1035,232 @@ elements:
       <<: *group-global-attributes
 
   head:
-    description: ""
-    ref: ""
+    description: Container for document metadata
+    ref: https://html.spec.whatwg.org/multipage/semantics.html#the-head-element
+    interface: 	HTMLHeadElement
     attributes:
       <<: *group-global-attributes
 
   header:
-    description: ""
-    ref: ""
+    description: Introductory or navigational aids for a page or section
+    ref: https://html.spec.whatwg.org/multipage/sections.html#the-header-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   hgroup:
-    description: ""
-    ref: ""
+    description: Heading group
+    ref: https://html.spec.whatwg.org/multipage/sections.html#the-hgroup-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   hr:
-    description: ""
-    ref: ""
+    description: Thematic break
+    ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-hr-element
+    interface: HTMLHRElement
     attributes:
       <<: *group-global-attributes
 
   html:
-    description: ""
-    ref: ""
+    description: Root element
+    ref: https://html.spec.whatwg.org/multipage/semantics.html#the-html-element
+    interface: HTMLHtmlElement
     attributes:
       <<: *group-global-attributes
+      # manifest:
+      #   description: Use service workers instead
+      #   ref: https://html.spec.whatwg.org/multipage/obsolete.html#attr-html-manifest
+      #   values:
 
   i:
-    description: ""
-    ref: ""
+    description: Alternate voice
+    ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-i-element
+    interface: HTMLElement
     attributes:
       <<: *group-global-attributes
 
   iframe:
-    description: ""
-    ref: ""
+    description: Nested browsing context
+    ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element
+    interface: HTMLIFrameElement
     attributes:
       <<: *group-global-attributes
-
-      src: {}
-      srcdoc: {}
-      name: {}
-      sandbox: {}
-      allow: {}
-      allowfullscreen: {}
-      width: {}
-      height: {}
-      referrerpolicy: {}
-      loading: {}
-
+      <<: *group-dim-attributes 
+      src:
+        <<: *attr-src
+        ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-src
+      srcdoc: 
+        description: A document to render in the iframe
+        ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-srcdoc
+        values: The source of an iframe srcdoc document
+      name: 
+        description: Name of nested browsing context
+        ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-name
+        values: *text
+      sandbox: 
+        description: Security rules for nested content
+        ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-sandbox
+        values: [*unordered-set-of-unique-space-separated-tokens, *ASCII-case-insensitive, ["allow-downloads","allow-forms","allow-modals","allow-orientation-lock","allow-pointer-lock","allow-popups","allow-popups-to-escape-sandbox","allow-presentation","allow-same-origin","allow-scripts","allow-top-navigation","allow-top-navigation-by-user-activation","allow-top-navigation-to-custom-protocols"]]
+      allow: 
+        description: Permissions policy to be applied to the iframe's contents
+        ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-allow
+        values: *serialized-permission-policy
+      allowfullscreen:
+        description: Whether to allow the iframe's contents to use requestFullscreen()
+        ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-allowfullscreen
+        values: *boolean
+      referrerpolicy:
+        <<: *attr-refferer-policy
+        ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-referrerpolicy
+      loading:
+        <<: &attr-loading
+        ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#attr-iframe-loading
+    
   img:
-    description: ""
-    ref: ""
+    description: 	Image
+    ref: https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element
+    interface: HTMLImageElement
     attributes:
       <<: *group-global-attributes
-
-      alt: {}
-      src: {}
-      srcset: {}
-      sizes: {}
-      crossorigin: {}
-      usemap: {}
-      ismap: {}
-      width: {}
-      height: {}
-      referrerpolicy: {}
-      decoding: {}
-      loading: {}
+      <<: *group-dim-attributes
+      alt: 
+      <<: *attr-alt
+        ref: https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-alt
+      src:
+        <<: *attr-src
+        ref: https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-src
+      srcset: 
+        <<: *attr-srcset
+        ref: https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-srcset
+      sizes:
+        <<: *attr-srcset
+        ref: https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-sizes
+      crossorigin:
+        <<: *attr-crossorigin
+        ref: https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-crossorigin
+      usemap: 
+        description: Name of image map to use
+        ref: https://html.spec.whatwg.org/multipage/image-maps.html#attr-hyperlink-usemap
+        values: *hash-name-reference
+      ismap:
+        description: Whether the image is a server-side image map
+        ref: https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-ismap
+        values: *boolean
+      referrerpolicy:
+        <<: *attr-refferer-policy
+        ref: https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-referrerpolicy
+      decoding:
+        description: Decoding hint to use when processing this image for presentation
+        ref: https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-decoding
+        values: ["sync", "async", "auto"] 
+      loading:
+        <<: *attr-loading
+        ref: https://html.spec.whatwg.org/multipage/embedded-content.html#attr-img-loading
 
   input:
-    description: ""
-    ref: ""
+    description: Form control
+    ref: https://html.spec.whatwg.org/multipage/input.html#the-input-element
+    interface: HTMLInputElement
     attributes:
       <<: *group-global-attributes
+      <<: *group-fs-attributes
+      <<: *group-dim-attributes
+      <<: *group-ressources-form
+      accept:
+        description: Hint for expected file type in file upload controls
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-accept
+        values: *set-of-comma-separated-tokens
 
-      accept: {}
-      alt: {}
-      autocomplete: {}
-      checked: {}
-      dirname: {}
-      disabled: {}
-      form: {}
-      formaction: {}
-      formenctype: {}
-      formmethod: {}
-      formnovalidate: {}
-      formtarget: {}
-      height: {}
-      list: {}
-      max: {}
-      maxlength: {}
-      min: {}
+      alt:
+        <<: *attr-alt
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-alt
+      
+      autocomplete: 
+        <<: *attr-autocomplete
+
+      checked:
+        description: Whether the control is checked
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-checked
+        values: *boolean
+
+      dirname: 
+        <<: *attr-dirname
+
+      disabled: 
+        <<: *attr-disabled
+
+      list:
+        description: List of autocomplete options
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-list
+        values: *unique-identifier
+
+      max: 
+        description: Maximum value
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-max
+        values: varies
+
+      maxlength: 
+        <<: *attr-maxlength
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-maxlength
+
+      min:
+        description: Minimum value
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-min
+        values: varies
+
+      minlength: 
+        <<: *attr-minlength
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-minlength
+
+      multiple:
+        <<: *attr-multiple
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-multiple
+
+      pattern: 
+        description: Pattern to be matched by the form control's value	
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-pattern
+        values: Regular expression matching the JavaScript Pattern production
+      
+      placeholder: 
+        <<: *attr-placeholder
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-placeholder
+
+      readonly:
+        <<: *attr-readonly
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-readonly
+      
+      required: 
+        <<: *attr-required
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-required
+
+      size:
+        <<: *attr-size
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-size
+
+      src: 
+        <<: *sttr-src
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-src
+      
+      step: 
+        description: Granularity to be matched by the form control's value
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-step
+        values: *floating-point-number greater than 0
+
+      type: 
+        description: Type of form control
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-type
+        values: *input-type-keyword
+
+      value:
+        description: Value of the form control
+        ref: https://html.spec.whatwg.org/multipage/input.html#attr-input-value
+        values: varies
+
+      
+
+
+      
 
   ins:
     description: ""
@@ -1021,22 +1298,7 @@ elements:
     attributes:
       <<: *group-global-attributes
 
-      href: {}
-      crossorigin: {}
-      rel: {}
-      as: {}
-      media: {}
-      hreflang: {}
-      type: {}
-      sizes: {}
-      imagesrcset: {}
-      imagesizes: {}
-      referrerpolicy: {}
-      integrity: {}
-      blocking: {}
-      color: {}
-      disabled: {}
-
+     
   main:
     description: ""
     ref: ""
@@ -1067,12 +1329,6 @@ elements:
     attributes:
       <<: *group-global-attributes
 
-      name: {}
-      http-equiv: {}
-      content: {}
-      charset: {}
-      media: {}
-
   meter:
     description: ""
     ref: ""
@@ -1097,12 +1353,6 @@ elements:
     attributes:
       <<: *group-global-attributes
 
-      data: {}
-      type: {}
-      name: {}
-      form: {}
-      width: {}
-      height: {}
 
   ol:
     description: ""
@@ -1194,14 +1444,6 @@ elements:
     attributes:
       <<: *group-global-attributes
 
-      src: {}
-      type: {}
-      async: {}
-      defer: {}
-      crossorigin: {}
-      integrity: {}
-      referrerpolicy: {}
-      blocking: {}
 
   section:
     description: ""
@@ -1215,13 +1457,7 @@ elements:
     attributes:
       <<: *group-global-attributes
 
-      autocomplete: {}
-      disabled: {}
-      form: {}
-      multiple: {}
-      name: {}
-      required: {}
-      size: {}
+     
 
   slot:
     description: ""
@@ -1241,13 +1477,7 @@ elements:
     attributes:
       <<: *group-global-attributes
 
-      src: {}
-      type: {}
-      srcset: {}
-      sizes: {}
-      media: {}
-      width: {}
-      height: {}
+      
 
   span:
     description: ""
@@ -1315,19 +1545,7 @@ elements:
     attributes:
       <<: *group-global-attributes
 
-      cols: {}
-      dirname: {}
-      disabled: {}
-      form: {}
-      maxlength: {}
-      minlength: {}
-      name: {}
-      placeholder: {}
-      readonly: {}
-      required: {}
-      rows: {}
-      wrap: {}
-
+    
   tfoot:
     description: ""
     ref: ""
@@ -1395,12 +1613,7 @@ elements:
       <<: *group-global-attributes
       <<: *group-media-player
 
-      src: {}
-      crossorigin: {}
-      poster: {}
-      playsinline: {}
-      width: {}
-      height: {}
+  
 
   wbr:
     description: ""
