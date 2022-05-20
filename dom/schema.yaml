@@ -1,0 +1,29 @@
+type: object
+properties:
+  namespace: { type: string }
+
+  version:
+    type: object
+    properties:
+      ref: { type: string }
+      pubdate: { type: string }
+    required: [ref, pubdate]
+
+  elements:
+    type: object
+    additionalProperties:
+      type: object
+      properties:
+        ref: { type: string }
+        description: { type: string }
+        interface: { type: string }
+        attributes:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              ref: { type: string }
+              description: { type: string }
+              values: {}
+            required: [ref, description, values]
+      required: [ref, description, attributes]

@@ -1,0 +1,24 @@
+{
+  "name": "machine-standards",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "json schema for machine standards file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CathouZen/machine-standards.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CathouZen/machine-standards/issues"
+  },
+  "homepage": "https://github.com/CathouZen/machine-standards#readme",
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "jsonschema": "^1.4.0"
+  }
+}
