@@ -275,7 +275,7 @@ mixin-attributes:
 
   attr-blocking: &attr-blocking
     description: Whether the element is potentially render-blocking
-    values: &unordered-set-of-unique-space-separated-tokens
+    values: *unordered-set-of-unique-space-separated-tokens
 
   attr-integrity: &attr-integrity
     description: Integrity metadata used in Subresource Integrity checks [SRI]
@@ -1807,7 +1807,7 @@ elements:
       href:
         description: Address of the hyperlink
         ref: https://html.spec.whatwg.org/multipage/semantics.html#attr-link-href
-        values: &non-empty-url
+        values: *non-empty-url
 
       crossorigin:
         <<: *attr-crossorigin
