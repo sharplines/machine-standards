@@ -2,6 +2,9 @@
 # This file is hosted and maintained at
 #   https://github.com/sharplines/machine-standards
 #
+
+$schema: https://raw.githubusercontent.com/sharplines/machine-standards/main/dom/schema.yaml
+
 namespace: http://www.w3.org/1999/xhtml
 
 version:
@@ -247,7 +250,6 @@ mixin-value-types:
   CSS-color: &CSS-color
     type: string
 
-mixin-elements:
 
 mixin-attributes:
   attr-button-value: &attr-button-value
@@ -684,11 +686,322 @@ mixin-attribute-groups:
       ref: https://html.spec.whatwg.org/multipage/tables.html#attr-tdth-headers
       values: *unordered-set-of-unique-space-separated-tokens
 
+mixin-event-groups:
+  group-dom-events: &group-dom-events
+    abort: 
+      description: Dispatched when the loading of a resource has been aborted, such as by a user canceling the load while it is still in progress.
+      ref: https://w3c.github.io/uievents/#abort
+      interface: Event
+    auxclick: 
+      description: Dispatched on the topmost event target indicated by the pointer, when the user presses down and releases the non-primary pointer button, or otherwise activates the pointer in a manner that simulates such an action.
+      ref: https://w3c.github.io/uievents/#event-type-auxclick
+      interface: PointerEvent
+    beforeinput: 
+      description: Dispatched when the DOM is about to be updated.
+      ref: https://w3c.github.io/uievents/#event-type-beforeinput
+      interface: InputEvent
+    blur:
+      description: Dispatched when an event target loses focus.
+      ref: https://w3c.github.io/uievents/#blur
+      interface: Event
+    click:
+      description: Dispatched on the topmost event target indicated by the pointer, when the user presses down and releases the primary pointer button, or otherwise activates the pointer in a manner that simulates such an action
+      ref: https://w3c.github.io/uievents/#event-type-click
+      interface: PointerEvent
+    compositionstart:
+      description: Dispatched when a text composition system is enabled and a new composition session is about to begin (or has begun, depending on the text composition system) in preparation for composing a passage of text.
+      ref: https://w3c.github.io/uievents/#compositionstart
+      interface: CompositionEvent
+    compositionupdate:
+      description: Dispatched during a composition session when a text composition system updates its active text passage with a new character, which is reflected in the string in data.
+      ref: https://w3c.github.io/uievents/#compositionupdate
+      interface: CompositionEvent
+    compositionend:
+      description: Dispatched when a text composition system completes or cancels the current composition session, and the compositionend event MUST be dispatched after the control is updated.
+      ref: https://w3c.github.io/uievents/#compositionend
+      interface: CompositionEvent
+    contextmenu:
+      description: A user agent MUST dispatch this event before invoking a context menu.
+      ref: https://w3c.github.io/uievents/#contextmenu
+      interface: PointerEvent
+    dblclick:
+      description: Dispatched when the primary button of a pointing device is clicked twice over an element.
+      ref: https://w3c.github.io/uievents/#dblclick
+      interface: MouseEvent
+    error:
+      description: Dispatched when a resource failed to load, or has been loaded but cannot be interpreted according to its semantics, such as an invalid image, a script execution error, or non-well-formed XML.
+      ref: https://w3c.github.io/uievents/#error
+      interface: Event
+    focus:
+      description: Dispatched when an event target receives focus.
+      ref: https://w3c.github.io/uievents/#focus
+      interface: FocusEvent
+    focusin:
+      description: Dispatched when an event target is about to receive focus.
+      ref: https://w3c.github.io/uievents/#focusin
+      interface: FocusEvent
+    focusout:
+      description: Dispatched when an event target is about to lose focus.
+      ref: https://w3c.github.io/uievents/#focusout
+      interface: FocusEvent
+    input:
+      description: Dispatched immediately after the DOM has been updated.
+      ref: https://w3c.github.io/uievents/#input
+      interface: InputEvent
+    keydown:
+      description: Dispatched when a key is pressed down.
+      ref: https://w3c.github.io/uievents/#keydown
+      interface: KeyboardEvent
+    keyup:
+      description: Dispatched when a key is released.
+      ref: https://w3c.github.io/uievents/#keyup
+      interface: KeyboardEvent
+    load:
+      description: Dispatched when the DOM implementation finishes loading the resource (such as the document) and any dependent resources (such as images, style sheets, or scripts).
+      ref: https://w3c.github.io/uievents/#load
+      interface: Event
+    mousedown:
+      description: Dispatched when a pointing device button is pressed over an element.
+      ref: https://w3c.github.io/uievents/#mousedown
+      interface: MouseEvent
+    mouseenter:
+      description: Dispatched when a pointing device is moved onto the boundaries of an element or one of its descendent elements.
+      ref: https://w3c.github.io/uievents/#mouseenter
+      interface: MouseEvent
+    mouseleave:
+      description: Dispatched when a pointing device is moved off of the boundaries of an element and all of its descendent elements. 
+      ref: https://w3c.github.io/uievents/#mouseleave
+      interface: MouseEvent
+    mousemove:
+      description: Dispatched when a pointing device is moved while it is over an element.
+      ref: https://w3c.github.io/uievents/#mousemove
+      interface: MouseEvent
+    mouseout:
+      description: Dispatched when a pointing device is moved off of the boundaries of an element or when the element is moved to be no longer underneath the primary pointing device.
+      ref: https://w3c.github.io/uievents/#mouseout
+      interface: MouseEvent
+    mouseover:
+      description: Dispatched when a pointing device is moved onto the boundaries of an element or when the element is moved to be underneath the primary pointing device.
+      ref: https://w3c.github.io/uievents/#mouseover
+      interface: MouseEvent
+    mouseup:
+      description: Dispatched when a pointing device button is released over an element.
+      ref: https://w3c.github.io/uievents/#mouseup
+      interface: MouseEvent
+    select:
+      description: Dispatched when a user selects some text.
+      ref: https://w3c.github.io/uievents/#select
+      interface: Event
+    unload:
+      description: Dispatched when the DOM Implementation removes from the environment the resource (such as the document) or any dependent resources (such as images, style sheets, scripts).
+      ref: https://w3c.github.io/uievents/#unload
+      interface: Event
+    wheel:
+      description: Dispatched when a mouse wheel has been rotated around any axis, or when an equivalent input device (such as a mouse-ball, certain tablets or touchpads, etc.) has emulated such an action.
+      ref: https://w3c.github.io/uievents/#wheel
+      interface: WheelEvent
+
+  group-media-events: &group-media-events
+    loadstart:
+      description: The user agent begins looking for media data, as part of the resource selection algorithm.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-loadstart
+      interface: Event
+    progress:
+      description: The user agent is fetching media data.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-progress
+      interface: Event
+    suspend:
+      description: The user agent is intentionally not currently fetching media data.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-suspend
+      interface: Event
+    emptied:
+      description: A media element whose networkState was previously not in the NETWORK_EMPTY state has just switched to that state (either because of a fatal error during load that's about to be reported, or because the load() method was invoked while the resource selection algorithm was already running).
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-emptied
+      interface: Event
+    stalled:
+      description: The user agent is trying to fetch media data, but data is unexpectedly not forthcoming.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-stalled
+      interface: Event
+    loadmetadata:
+      description: The user agent has just determined the duration and dimensions of the media resource and the text tracks are ready.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-loadedmetadata
+      interface: Event
+    canplay:
+      description: The user agent can resume playback of the media data, but estimates that if playback were to be started now, the media resource could not be rendered at the current playback rate up to its end without having to stop for further buffering of content.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-canplay
+      interface: Event
+    canplaythrough:
+      description: 	The user agent estimates that if playback were to be started now, the media resource could be rendered at the current playback rate all the way to its end without having to stop for further buffering.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-canplaythrough
+      interface: Event
+    playing:
+      description: Playback is ready to start after having been paused or delayed due to lack of media data.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-playing
+      interface: Event
+    waiting:
+      description: Playback has stopped because the next frame is not available, but the user agent expects that frame to become available in due course.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-waiting
+      interface: Event
+    seeking:
+      description: The seeking IDL attribute changed to true, and the user agent has started seeking to a new position.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-seeking
+      interface: Event
+    seeked:
+      description: The seeking IDL attribute changed to false after the current playback position was changed.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-seeked
+      interface: Event
+    ended:
+      description: Playback has stopped because the end of the media resource was reached.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-ended
+      interface: Event
+    durationchange:
+      description: The duration attribute has just been updated.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-durationchange
+      interface: Event
+    timeupdate:
+      description: 	The current playback position changed as part of normal playback or in an especially interesting way, for example discontinuously.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-timeupdate
+      interface: Event
+    play:
+      description: The element is no longer paused. Fired after the play() method has returned, or when the autoplay attribute has caused playback to begin.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-play
+      interface: Event
+    pause:
+      description: The element has been paused. Fired after the pause() method has returned.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-pause
+      interface: Event
+    ratechange:
+      description: Either the defaultPlaybackRate or the playbackRate attribute has just been updated.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-ratechange
+      interface: Event
+    volumechange:
+      description: Either the volume attribute or the muted attribute has changed. Fired after the relevant attribute's setter has returned.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-volumechange
+      interface: Event
+    resize:
+      description: One or both of the videoWidth and videoHeight attributes have just been updated.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-resize
+      interface: Event
+    addtrack:
+      description: A track has been added to the track list.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-addtrack
+      interface: Event
+    removetrack:
+      description: A track has been removed from the track list.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-removetrack
+      interface: Event
+    cuechange:
+      description: One or more cues in the track have become active or stopped being active.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-cuechange
+      interface: Event
+    enter:
+      description: The cue has become active.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-enter
+      interface: Event
+    exit:
+      description: The cue has stopped being active.
+      ref: https://html.spec.whatwg.org/multipage/media.html#event-media-exit
+      interface: Event
+
+  group-global-events: &group-global-events
+    <<: *group-dom-events
+    <<: *group-media-events
+
+    beforematch:
+      description: Fired on elements with the hidden=until-found attribute before they are revealed.
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-beforematch
+      interface: Event
+    cancel:
+      description: Fired at dialog elements when they are canceled by the user (e.g., by pressing the Escape key), or at input elements in the File state when the user does not change their selection
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-cancel
+      interface: Event
+    change: 
+      description: Fired at controls when the user commits a value change (see also the input event)
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-change
+      interface: Event
+    close: 
+      description: Fired at dialog elements when they are closed
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-close
+      interface: Event
+    copy: 
+      description: Fired at elements when the user copies data to the clipboard
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-copy
+      interface: Event
+    cut:
+      description: Fired at elements when the user copies the selected data on the clipboard and removes the selection from the document
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-cut
+      interface: Event
+    drag:
+      description: ""
+      ref: https://html.spec.whatwg.org/multipage/dnd.html#event-dnd-drag
+      interface: DragEvent
+    dragend:
+      description: ""
+      ref: https://html.spec.whatwg.org/multipage/dnd.html#event-dnd-dragend
+      interface: DragEvent
+    dragenter:
+      description: ""
+      ref: https://html.spec.whatwg.org/multipage/dnd.html#event-dnd-draenter
+      interface: DragEvent
+    dragleave:
+      description: ""
+      ref: https://html.spec.whatwg.org/multipage/dnd.html#event-dnd-dragleave
+      interface: DragEvent
+    dragover:
+      description: ""
+      ref: https://html.spec.whatwg.org/multipage/dnd.html#event-dnd-dragover
+      interface: DragEvent
+    dragstart:
+      description: Initiate the drag-and-drop operation
+      ref: https://html.spec.whatwg.org/multipage/dnd.html#event-dnd-dragstart
+      interface: DragEvent
+    drop:
+      description: ""
+      ref: https://html.spec.whatwg.org/multipage/dnd.html#event-dnd-drop
+      interface: DragEvent
+    formdata:
+      description: Fired at a form element when it is constructing the entry list
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-formdata
+      interface: FormDataEvent
+    invalid:
+      description: 	Fired at controls during form validation if they do not satisfy their constraints
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-invalid
+      interface: Event
+    paste:
+      description: Fired at elements when the user will insert the clipboard data in the most suitable format (if any) supported for the given context
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-paste
+      interface: Event
+    reset:
+      description: Fired at a form element when it is reset
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-reset
+      interface: Event
+    scroll:
+      description: Fired at the Document or element when the viewport or element is scrolled, respectively.
+      ref: https://drafts.csswg.org/cssom-view/#eventdef-document-scroll
+      interface: Event
+    securitypolicyviolation:
+      description: Fired at elements when a Content Security Policy violation is generated [CSP]
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-securitypolicyviolation
+      interface: Event
+    slotchange:
+      description: Fired at slot elements when their assigned nodes change
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-slotchange
+      interface: Event
+    submit:
+      description: Fired at a form element when it is submitted
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-submit
+      interface: Event
+    toggle:
+      description: Fired at details elements when they open or close
+      ref: https://html.spec.whatwg.org/multipage/indices.html#event-toggle
+      interface: Event
+
 elements:
   a:
     description: Hyperlink
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element
     interface: HTMLAnchorElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-hyperlink
@@ -698,6 +1011,7 @@ elements:
     description: Abbreviation
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-abbr-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -705,6 +1019,7 @@ elements:
     description: Contact information for a page or article element
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-address-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -712,6 +1027,7 @@ elements:
     description: Hyperlink or dead area on an image map
     ref: https://html.spec.whatwg.org/multipage/image-maps.html#the-area-element
     interface: HTMLAreaElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-hyperlink
@@ -731,6 +1047,7 @@ elements:
     description: Self-contained syndicatable or reusable composition
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-article-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -738,6 +1055,7 @@ elements:
     description: Sidebar for tangentially related content
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-aside-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -745,6 +1063,7 @@ elements:
     description: Audio player
     ref: https://html.spec.whatwg.org/multipage/media.html#the-audio-element
     interface: HTMLAudioElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-media-player
@@ -753,6 +1072,7 @@ elements:
     description: Keywords
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-b-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -760,6 +1080,7 @@ elements:
     description: Base URL and default target browsing context for hyperlinks and forms
     ref: https://html.spec.whatwg.org/multipage/semantics.html#the-base-element
     interface: HTMLBaseElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       href:
@@ -775,6 +1096,7 @@ elements:
     description: Represents a span of text that is to be isolated from its surroundings for the purposes of bidirectional text formatting.
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-bdi-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -782,6 +1104,7 @@ elements:
     description: Represents explicit text directionality formatting control for its children. It allows authors to override the Unicode bidirectional algorithm by explicitly specifying a direction override.
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-bdo-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -789,6 +1112,7 @@ elements:
     description: Represents a section that is quoted from another source
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-blockquote-element
     interface: HTMLQuoteElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       cite:
@@ -799,6 +1123,8 @@ elements:
     description: Represents the contents of the document
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-body-element
     interface: HTMLBodyElement
+    events:
+      <<: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -806,6 +1132,7 @@ elements:
     description: Line break, e.g. in poem or postal address
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-br-element
     interface: HTMLBRElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -813,6 +1140,7 @@ elements:
     description: Represents a button labeled by its contents
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-button-element
     interface: HTMLButtonElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-fs-attributes
@@ -836,6 +1164,16 @@ elements:
     description: Scriptable bitmap canvas
     ref: https://html.spec.whatwg.org/multipage/canvas.html#the-canvas-element
     interface: HTMLCanvasElement
+    events: 
+      <<: *group-global-events
+      contextlost:
+        description: Fired when the corresponding CanvasRenderingContext2D or OffscreenCanvasRenderingContext2D is lost
+        ref: https://html.spec.whatwg.org/multipage/indices.html#event-contextlost
+        interface: Event
+      contextrestored: 
+        description: Fired when the corresponding CanvasRenderingContext2D or OffscreenCanvasRenderingContext2D is restored after being lost
+        ref: https://html.spec.whatwg.org/multipage/indices.html#event-contextrestored
+        interface: Event
     attributes:
       <<: *group-global-attributes
       width:
@@ -851,6 +1189,7 @@ elements:
     description: Table caption
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-caption-element
     interface: HTMLTableCaptionElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -858,6 +1197,7 @@ elements:
     description: Title of a work
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-cite-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -865,6 +1205,7 @@ elements:
     description: Computer code
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-code-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -872,6 +1213,7 @@ elements:
     description: Table column
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-col-element
     interface: HTMLTableColElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       span:
@@ -882,6 +1224,7 @@ elements:
     description: Group of columns in a table
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-colgroup-element
     interface: HTMLTableColElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       span:
@@ -892,6 +1235,7 @@ elements:
     description: Machine-readable equivalent
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-data-element
     interface: HTMLDataElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       value:
@@ -903,6 +1247,7 @@ elements:
     description: Container for options for combo box control
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-datalist-element
     interface: HTMLDataListElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -910,6 +1255,7 @@ elements:
     description: Represents the description, definition, or value, part of a term-description group in a description list (dl element)
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-dd-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -917,6 +1263,7 @@ elements:
     description: A removal from the document
     ref: https://html.spec.whatwg.org/multipage/edits.html#the-del-element
     interface: HTMLModElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-del-ins
@@ -925,6 +1272,7 @@ elements:
     description: Disclosure control for hiding details
     ref: https://html.spec.whatwg.org/multipage/interactive-elements.html#the-details-element
     interface: HTMLDetailsElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       open:
@@ -936,6 +1284,7 @@ elements:
     description: Defining instance
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-dfn-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -943,6 +1292,7 @@ elements:
     description: Dialog box or window
     ref: https://html.spec.whatwg.org/multipage/interactive-elements.html#the-dialog-element
     interface: HTMLDialogElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       open:
@@ -954,6 +1304,7 @@ elements:
     description: Generic flow container, or container for name-value groups in dl elements
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-div-element
     interface: HTMLDivElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -961,6 +1312,7 @@ elements:
     description: Association list consisting of zero or more name-value groups
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-dl-element
     interface: HTMLDListElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -968,6 +1320,7 @@ elements:
     description: Represents the term, or name, part of a term-description group in a description list (dl element)
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-dt-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -975,6 +1328,7 @@ elements:
     description: Stress emphasis of its contents
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-em-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -982,6 +1336,7 @@ elements:
     description: Provides an integration point for an external (typically non-HTML) application or interactive content
     ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-embed-element
     interface: HTMLEmbedElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-dim-attributes
@@ -997,6 +1352,7 @@ elements:
     description: Group of form controls
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-fieldset-element
     interface: HTMLFieldSetElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       form:
@@ -1014,6 +1370,7 @@ elements:
     description: Caption for figure
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-figcaption-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1021,6 +1378,7 @@ elements:
     description: Figure with optional caption
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-figure-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1028,6 +1386,7 @@ elements:
     description: Footer for a page or section
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-footer-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1035,6 +1394,7 @@ elements:
     description: User-submittable form
     ref: https://html.spec.whatwg.org/multipage/forms.html#the-form-element
     interface: HTMLFormElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1092,6 +1452,7 @@ elements:
     description: Section heading
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements
     interface: HTMLHeadingElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1099,6 +1460,7 @@ elements:
     description: Section heading
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements
     interface: HTMLHeadingElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1106,6 +1468,7 @@ elements:
     description: Section heading
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements
     interface: HTMLHeadingElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1113,6 +1476,7 @@ elements:
     description: Section heading
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements
     interface: HTMLHeadingElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1120,6 +1484,7 @@ elements:
     description: Section heading
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements
     interface: HTMLHeadingElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1127,6 +1492,7 @@ elements:
     description: Section heading
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-h1,-h2,-h3,-h4,-h5,-and-h6-elements
     interface: HTMLHeadingElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1134,6 +1500,7 @@ elements:
     description: Container for document metadata
     ref: https://html.spec.whatwg.org/multipage/semantics.html#the-head-element
     interface: HTMLHeadElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1141,6 +1508,7 @@ elements:
     description: Introductory or navigational aids for a page or section
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-header-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1148,6 +1516,7 @@ elements:
     description: Heading group
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-hgroup-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1155,6 +1524,7 @@ elements:
     description: Thematic break
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-hr-element
     interface: HTMLHRElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1162,6 +1532,7 @@ elements:
     description: Root element
     ref: https://html.spec.whatwg.org/multipage/semantics.html#the-html-element
     interface: HTMLHtmlElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       # manifest:
@@ -1173,6 +1544,7 @@ elements:
     description: Alternate voice
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-i-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1180,6 +1552,7 @@ elements:
     description: Nested browsing context
     ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-iframe-element
     interface: HTMLIFrameElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-dim-attributes
@@ -1238,6 +1611,7 @@ elements:
     description: Image
     ref: https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element
     interface: HTMLImageElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-dim-attributes
@@ -1280,6 +1654,7 @@ elements:
     description: Form control
     ref: https://html.spec.whatwg.org/multipage/input.html#the-input-element
     interface: HTMLInputElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-fs-attributes
@@ -1377,6 +1752,7 @@ elements:
     description: An addition to the document
     ref: https://html.spec.whatwg.org/multipage/edits.html#the-ins-element
     interface: HTMLModElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-del-ins
@@ -1385,6 +1761,7 @@ elements:
     description: User input
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-kbd-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1392,6 +1769,7 @@ elements:
     description: Caption for a form control
     ref: https://html.spec.whatwg.org/multipage/forms.html#the-label-element
     interface: HTMLLabelElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       for:
@@ -1403,6 +1781,7 @@ elements:
     description: Caption for fieldset
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-legend-element
     interface: HTMLLegendElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1410,6 +1789,7 @@ elements:
     description: List item
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-li-element
     interface: HTMLLIElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       value:
@@ -1421,6 +1801,7 @@ elements:
     description: Link metadata
     ref: https://html.spec.whatwg.org/multipage/semantics.html#the-link-element
     interface: HTMLLinkElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       href:
@@ -1503,6 +1884,7 @@ elements:
     description: Container for the dominant contents of the document
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-main-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1510,6 +1892,7 @@ elements:
     description: Image map
     ref: https://html.spec.whatwg.org/multipage/image-maps.html#the-map-element
     interface: HTMLMapElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       name:
@@ -1521,6 +1904,7 @@ elements:
     description: Highlight
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-mark-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1528,6 +1912,7 @@ elements:
     description: Menu of commands
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-menu-element
     interface: HTMLMenuElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1535,6 +1920,7 @@ elements:
     description: Text metadata
     ref: https://html.spec.whatwg.org/multipage/semantics.html#the-meta-element
     interface: HTMLMetaElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       name:
@@ -1572,6 +1958,7 @@ elements:
     description: Gauge
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-meter-element
     interface: HTMLMeterElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       value:
@@ -1606,6 +1993,7 @@ elements:
     description: Section with navigational links
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-nav-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1613,6 +2001,7 @@ elements:
     description: Fallback content for script
     ref: https://html.spec.whatwg.org/multipage/scripting.html#the-noscript-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1620,6 +2009,7 @@ elements:
     description: Image, nested browsing context, or plugin
     ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element
     interface: HTMLObjectElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-dim-attributes
@@ -1643,6 +2033,7 @@ elements:
     description: Ordered list
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-ol-element
     interface: HTMLOListElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       reversed:
@@ -1664,6 +2055,7 @@ elements:
     description: Group of options in a list box
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-optgroup-element
     interface: HTMLOptGroupElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       disabled:
@@ -1677,6 +2069,7 @@ elements:
     description: Option in a list box or combo box control
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-option-element
     interface: HTMLOptionElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       disabled:
@@ -1700,6 +2093,7 @@ elements:
     description: Calculated output value
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-output-element
     interface: HTMLOutputElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       for:
@@ -1715,6 +2109,7 @@ elements:
     description: Paragraph
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-p-element
     interface: HTMLParagraphElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1722,6 +2117,7 @@ elements:
     description: Image
     ref: https://html.spec.whatwg.org/multipage/embedded-content.html#the-picture-element
     interface: HTMLPictureElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1729,6 +2125,7 @@ elements:
     description: Block of preformatted text
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-pre-element
     interface: HTMLPreElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1736,6 +2133,7 @@ elements:
     description: Progress bar
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-progress-element
     interface: HTMLProgressElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       value:
@@ -1750,6 +2148,7 @@ elements:
     description: Quotation
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-q-element
     interface: HTMLQuoteElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       cite:
@@ -1760,6 +2159,7 @@ elements:
     description: Parenthesis for ruby annotation text
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-rp-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1767,6 +2167,7 @@ elements:
     description: Ruby annotation text
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-rt-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1774,6 +2175,7 @@ elements:
     description: Ruby annotation(s)
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-ruby-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1781,6 +2183,7 @@ elements:
     description: Inaccurate text
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-s-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1788,6 +2191,7 @@ elements:
     description: Computer output
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-samp-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1795,6 +2199,7 @@ elements:
     description: Embedded script
     ref: https://html.spec.whatwg.org/multipage/scripting.html#the-script-element
     interface: HTMLScriptElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       src:
@@ -1840,6 +2245,7 @@ elements:
     description: Generic document or application section
     ref: https://html.spec.whatwg.org/multipage/sections.html#the-section-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1847,6 +2253,7 @@ elements:
     description: List box control
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-select-element
     interface: HTMLSelectElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-form-entry
@@ -1864,6 +2271,7 @@ elements:
     description: Shadow tree slot
     ref: https://html.spec.whatwg.org/multipage/scripting.html#the-slot-element
     interface: HTMLSlotElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       name:
@@ -1875,6 +2283,7 @@ elements:
     description: Side comment
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-small-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1882,6 +2291,7 @@ elements:
     description: Image source for img or media source for video or audio
     ref: https://html.spec.whatwg.org/multipage/embedded-content.html#the-source-element
     interface: HTMLSourceElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-dim-attributes
@@ -1905,6 +2315,7 @@ elements:
     description: Generic phrasing container
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-span-element
     interface: HTMLSpanElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1912,6 +2323,7 @@ elements:
     description: Importance
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-strong-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1919,6 +2331,7 @@ elements:
     description: Embedded styling information
     ref: https://html.spec.whatwg.org/multipage/semantics.html#the-style-element
     interface: HTMLStyleElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       media:
@@ -1932,6 +2345,7 @@ elements:
     description: Subscript
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-sub-and-sup-elements
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1939,6 +2353,7 @@ elements:
     description: Caption for details
     ref: https://html.spec.whatwg.org/multipage/interactive-elements.html#the-summary-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1946,6 +2361,7 @@ elements:
     description: Superscript
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-sub-and-sup-elements
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1953,6 +2369,7 @@ elements:
     description: Table
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-table-element
     interface: HTMLTableElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1960,6 +2377,7 @@ elements:
     description: Group of rows in a table
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-tbody-element
     interface: HTMLTableSectionElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1967,6 +2385,7 @@ elements:
     description: Table cell
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-td-element
     interface: HTMLTableCellElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-tdth-attributes
@@ -1975,6 +2394,7 @@ elements:
     description: Template
     ref: https://html.spec.whatwg.org/multipage/scripting.html#the-template-element
     interface: HTMLTemplateElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -1982,6 +2402,7 @@ elements:
     description: Multiline text controls
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-textarea-element
     interface: HTMLTextAreaElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-form-entry
@@ -2028,6 +2449,7 @@ elements:
     description: Group of footer rows in a table
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-tfoot-element
     interface: HTMLTableSectionElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -2035,6 +2457,7 @@ elements:
     description: Table header cell
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-th-element
     interface: HTMLTableCellElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-tdth-attributes
@@ -2053,6 +2476,7 @@ elements:
     description: Group of heading rows in a table
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-thead-element
     interface: HTMLTableSectionElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -2060,6 +2484,7 @@ elements:
     description: Machine-readable equivalent of date- or time-related data
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-time-element
     interface: HTMLTimeElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       datetime:
@@ -2083,6 +2508,7 @@ elements:
     description: Document title
     ref: https://html.spec.whatwg.org/multipage/semantics.html#the-title-element
     interface: HTMLTitleElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -2090,6 +2516,7 @@ elements:
     description: Table row
     ref: https://html.spec.whatwg.org/multipage/tables.html#the-tr-element
     interface: HTMLTableRowElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -2097,6 +2524,7 @@ elements:
     description: Timed text track
     ref: https://html.spec.whatwg.org/multipage/media.html#the-track-element
     interface: HTMLTrackElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       default:
@@ -2122,6 +2550,7 @@ elements:
     description: Unarticulated annotation
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-u-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -2129,6 +2558,7 @@ elements:
     description: List
     ref: https://html.spec.whatwg.org/multipage/grouping-content.html#the-ul-element
     interface: HTMLUListElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -2136,6 +2566,7 @@ elements:
     description: Variable
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-var-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
 
@@ -2143,6 +2574,7 @@ elements:
     description: Video player
     ref: https://html.spec.whatwg.org/multipage/media.html#the-video-element
     interface: HTMLVideoElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes
       <<: *group-media-player
@@ -2162,5 +2594,6 @@ elements:
     description: Line breaking opportunity
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-wbr-element
     interface: HTMLElement
+    events: *group-global-events
     attributes:
       <<: *group-global-attributes

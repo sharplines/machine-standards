@@ -16,11 +16,20 @@ properties:
     type: object
     additionalProperties:
       type: object
-      required: [ref, description, attributes, interface]
+      required: [ref, description, attributes, interface, events]
       additionalProperties: false
       properties:
         ref: { type: string }
         description: { type: string }
+        events: 
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: false
+            properties:
+              ref: { type: string }
+              description: { type: string }
+              interface: { type: string }
         interface: { type: string }
         attributes:
           type: object
