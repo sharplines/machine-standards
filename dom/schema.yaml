@@ -1,18 +1,23 @@
 type: object
+
+required: [namespace, version, elements]
 properties:
   namespace: { type: string }
 
   version:
     type: object
+    required: [ref, pubdate]
+    additionalProperties: false
     properties:
       ref: { type: string }
       pubdate: { type: string }
-    required: [ref, pubdate]
 
   elements:
     type: object
     additionalProperties:
       type: object
+      required: [ref, description, attributes, interface]
+      additionalProperties: false
       properties:
         ref: { type: string }
         description: { type: string }
@@ -21,9 +26,11 @@ properties:
           type: object
           additionalProperties:
             type: object
+            required: [ref, description, values]
+            additionalProperties: false
             properties:
               ref: { type: string }
               description: { type: string }
               values: {}
-            required: [ref, description, values]
-      required: [ref, description, attributes]
+            
+      

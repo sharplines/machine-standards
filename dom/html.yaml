@@ -2,9 +2,6 @@
 # This file is hosted and maintained at
 #   https://github.com/sharplines/machine-standards
 #
-
-$schema: ./schema.yaml
-
 namespace: http://www.w3.org/1999/xhtml
 
 version:
@@ -1423,7 +1420,7 @@ elements:
   link:
     description: Link metadata
     ref: https://html.spec.whatwg.org/multipage/semantics.html#the-link-element
-    instance: HTMLLinkElement
+    interface: HTMLLinkElement
     attributes:
       <<: *group-global-attributes
       href:
@@ -1622,6 +1619,7 @@ elements:
   object:
     description: Image, nested browsing context, or plugin
     ref: https://html.spec.whatwg.org/multipage/iframe-embed-object.html#the-object-element
+    interface: HTMLObjectElement
     attributes:
       <<: *group-global-attributes
       <<: *group-dim-attributes
@@ -1665,6 +1663,7 @@ elements:
   optgroup:
     description: Group of options in a list box
     ref: https://html.spec.whatwg.org/multipage/form-elements.html#the-optgroup-element
+    interface: HTMLOptGroupElement
     attributes:
       <<: *group-global-attributes
       disabled:
@@ -1750,6 +1749,7 @@ elements:
   q:
     description: Quotation
     ref: https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-q-element
+    interface: HTMLQuoteElement
     attributes:
       <<: *group-global-attributes
       cite:
@@ -1794,6 +1794,7 @@ elements:
   script:
     description: Embedded script
     ref: https://html.spec.whatwg.org/multipage/scripting.html#the-script-element
+    interface: HTMLScriptElement
     attributes:
       <<: *group-global-attributes
       src:

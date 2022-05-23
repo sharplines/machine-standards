@@ -2,22 +2,25 @@
   "name": "machine-standards",
   "version": "1.0.0",
   "type": "module",
-  "description": "json schema for machine standards file",
-  "main": "index.js",
+  "private": true,
+  "description": "Machine-readable versions of various standards",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check:html": "node scripts/validate.js dom/html.yaml",
+    "check:all": "node scripts/validate.js **/*.yaml"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CathouZen/machine-standards.git"
   },
-  "author": "",
+  "author": "Francois Chabot",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CathouZen/machine-standards/issues"
   },
   "homepage": "https://github.com/CathouZen/machine-standards#readme",
   "dependencies": {
+    "chalk": "^5.0.1",
+    "glob-promise": "^4.2.2",
     "js-yaml": "^4.1.0",
     "jsonschema": "^1.4.0"
   }
