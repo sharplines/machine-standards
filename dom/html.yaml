@@ -503,7 +503,7 @@ mixin-attribute-groups:
     inputmode:
       description: Hint for selecting an input modality
       ref: https://html.spec.whatwg.org/multipage/interaction.html#attr-inputmode
-      values: [none, text. tel, url, email, numeric, decimal, search]
+      values: [none, text, tel, url, email, numeric, decimal, search]
 
     is:
       description: Creates a customized built-in element
